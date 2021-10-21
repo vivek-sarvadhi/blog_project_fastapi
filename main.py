@@ -1,16 +1,19 @@
 from fastapi import FastAPI, Depends
 from models import models
 from core.database import engine
-from routers import authentication
+from routers import authentication,blog
 from schemas import authentication_schema
 from core import ouath2
 
 models.Base.metadata.create_all(bind=engine)
+
 app = FastAPI()
 
 
 app.include_router(authentication.router)
+app.include_router(blog.router)
 
-@app.get('/')
-def hello(get_current_user: authentication_schema.RegistrationBase = Depends(ouath2.get_current_user)):
-    return {'hello': "world"}
+# @app.get('/')
+# def hello(get_current_user: authentication_schema.RegistrationBase = Depends(ouath2.get_current_user)):
+#     return {'hello': "world"}
+

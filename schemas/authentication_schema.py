@@ -1,9 +1,9 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import Optional
 
 
 class RegistrationBase(BaseModel):
-    email: str = None
+    email: EmailStr
     password: str = None
 
 
