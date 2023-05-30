@@ -40,6 +40,9 @@ def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(
     if not Hash.verify_password(user.password, request.password):
         return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={'status': status.HTTP_400_BAD_REQUEST, 'error':True, 'error_message':"Invalid password"})
     access_token = jwttoken.create_access_token(data={"sub": request.username})
+    # token = models.UserToken(user_id=user.id,token=access_token)
+    # db.add(token)
+    # db.commit()
     return JSONResponse(content={"Status": status.HTTP_200_OK,
                                 "error": False,
                                 "message": "User Login Successfully.",

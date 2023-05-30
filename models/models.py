@@ -15,6 +15,13 @@ class User(Base):
     blogs = relationship("Blog", back_populates="creator")
 
 
+class UserToken(Base):
+    __tablename__ = 'usertoken'
+
+    id = Column(Integer, primary_key=True, index=True)
+    token = Column(String)
+    user_id = Column(Integer, ForeignKey("users.id"))
+
 class Blog(Base):
     __tablename__ = "blogs"
 
